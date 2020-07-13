@@ -7,8 +7,8 @@ import (
 	"github.com/emiliano080591/go-twittor/bd"
 )
 
-/*VerPeril permite extraer los valores del perfil*/
-func VerPeril(w http.ResponseWriter, r *http.Request) {
+/*VerPerfil permite extraer los valores del perfil*/
+func VerPerfil(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query().Get("id")
 	if len(ID) < 1 {
 		http.Error(w, "Debe enviar el parametro ID", http.StatusBadRequest)
