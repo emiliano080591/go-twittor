@@ -9,7 +9,7 @@ import (
 	"github.com/emiliano080591/go-twittor/models"
 )
 
-/*GraboTweet inserta un tweet*/
+/*GraboTweet permite grabar el tweet en la base de datos */
 func GraboTweet(w http.ResponseWriter, r *http.Request) {
 	var mensaje models.Tweet
 	err := json.NewDecoder(r.Body).Decode(&mensaje)
@@ -22,21 +22,15 @@ func GraboTweet(w http.ResponseWriter, r *http.Request) {
 
 	_, status, err := bd.InsertoTweet(registro)
 	if err != nil {
-		http.Error(w, "Ocurrio un error al intentar insertar el tweet "+err.Error(), 400)
+		http.Error(w, "Ocurrió un error al intentar insertar el registro, reintente nuevamente"+err.Error(), 400)
 		return
 	}
 
 	if status == false {
-		http.Error(w, "No se ha logrado insertar el tweet ", 400)
+		http.Error(w, "No se ha logrado insertar el Tweet", 400)
 		return
 	}
 
-	resp := models.RespuestaGeneral{
-		Status:  true,
-		Message: "Se inserto el tweet satisfactoriamente",
-	}
-
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(resp)
+
 }
