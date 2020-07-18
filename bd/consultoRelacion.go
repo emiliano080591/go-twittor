@@ -2,7 +2,6 @@ package bd
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/emiliano080591/go-twittor/models"
@@ -24,10 +23,9 @@ func ConsultoRelacion(t models.Relacion) (bool, error) {
 
 	var resultado models.Relacion
 	err := col.FindOne(ctx, condicion).Decode(&resultado)
-	fmt.Println(resultado)
 
 	if err != nil {
-		fmt.Println(err.Error())
+		//fmt.Println(err.Error())
 		return false, err
 	}
 
